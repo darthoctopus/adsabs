@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+"http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+<!--RAW FILE-->
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noarchive" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>{{paper.title.0}}</title>
+<meta name="citation_language" content="en" />
+<meta name="citation_doi" content="{{paper.doi.0}}" />
+<meta name="citation_abstract_html_url" content="http://adsabs.harvard.edu/abs/{{paper.bibcode}}" />
+<meta name="citation_title" content="{{paper.title.0}}" />
+<meta name="citation_authors" content="{% for auth in paper.authors %}{{auth}}; {% endfor %}" />
+<meta name="citation_keywords" content="{{paper.keywords}}" />
+<meta name="citation_date" content="{{paper.pubdate}}" />
+<meta name="citation_journal_title" content="{{paper.pub}}" />
+<meta name="citation_volume" content="{{paper.volume}}" />
+<meta name="citation_arxiv_id" content="{{eprint}}" />
+<link title="schema(PRISM)" rel="schema.prism" href="http://prismstandard.org/namespaces/1.2/basic/" />
+<meta name="prism.publicationName" content="{{paper.pub}}" />
+<meta name="prism.volume" content="{{paper.volume}}" />
+<meta name="prism.startingPage" content="" />
+<meta name="prism.endingPage" content="" />
+<link title="schema(DC)" rel="schema.dc" href="http://purl.org/dc/elements/1.1/" />
+<meta name="dc.language" content="en" />
+<meta name="dc.identifier" content="doi:{{paper.doi.0}}" />
+<meta name="dc.date" content="{{paper.pubdate}}" />
+<meta name="dc.source" content="{{paper.pub}}, Volume {{paper.volume}}, Issue {{paper.issue}}, article id. {{paper.page.0}} ({{paper.year}})." />
+<meta name="dc.title" content="{{paper.title.0}}" />
+
+{% for author in paper.author %}
+<meta name="dc.creator" content="{{author}}" />
+{%endfor%}
+
+<style>.a{background-color: #ffff88}</style>
+<style>.h{background-color: #ffff00}</style>
+<style>.b{background-color: #ccccff}</style>
+<style>.i{background-color: #3333ff}</style>
+<style>.c{background-color: #ffcccc}</style>
+<style>.j{background-color: #ff3333}</style>
+<style>.d{background-color: #bbffff}</style>
+<style>.k{background-color: #00ffff}</style>
+<style>.e{background-color: #ffdd77}</style>
+<style>.l{background-color: #ff6600}</style>
+<style>.f{background-color: #ccffaa}</style>
+<style>.m{background-color: #33ff00}</style>
+<style>.g{background-color: #ffccff}</style>
+<style>.n{background-color: #ff00ff}</style>
+<style type="text/css">
+@media (max-width : 980px) {
+* {
+  font-size: 18px !important;
+}
+a {
+  margin: 8px !important;
+  display:inline-block;
+}
+td:first-of-type {
+   white-space: normal !important;
+}
+td:first-of-type {
+   white-space: nowrap;
+}
+}
+</style>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+
+ul.head li {
+	font-weight: bold;
+}
+</style>
+<style type="text/css">
+a:link {color: #0000ff}
+a.oa:link {color: #00a000}
+a:visited {color: #4000a0}
+a.oa:visited {color: #006666}
+a:hover {color: #ff0000}
+a.oa:hover {color: #cc33cc}
+</style>
+</head>
+<body bgcolor="#ffffff"  text="#000000" link="#0000ff" alink="#ff0000" vlink="#4000a0">
+<p><p><h3>Emulator for <A HREF="http://adsabs.harvard.edu/">SAO/NASA ADS</a> <a href="http://adsabs.harvard.edu/abstract_service.html">Astronomy Abstract Service</A></h3>
+<hr>
+<p>
+<ul class='head'>
+<li><a class="oa" href="http://adsabs.harvard.edu/cgi-bin/nph-data_query?bibcode={{paper.bibcode}}&amp;link_type=EJOURNAL&amp;db_key=AST">Electronic Refereed Journal Article (HTML)</a></li>
+<li><a class="oa" href="http://adsabs.harvard.edu/cgi-bin/nph-data_query?bibcode={{paper.bibcode}}&amp;link_type=ARTICLE&amp;db_key=AST">Full Refereed Journal Article (PDF/Postscript)</a></li>
+<li><a class="oa" href="https://arxiv.org/abs/{{eprint}}">arXiv e-print</a> (arXiv:{{eprint}})</li>
+<li>{{paper.citation_count}} citations to this Article</li>
+</ul>
+<table><tbody>
+<tr><td valign="top" align="left"><b>Title:</b></td><td><br></td><td align="left" valign="top">{{paper.title.0}}</td></tr>
+<tr><td valign="top" align="left"><b>Authors:</b></td><td><br></td><td align="left" valign="top">
+{% for auth, aff, orcid in authors %}
+<a href="http://orcid.org/{{orcid}}" title="{{aff}}">{{auth}}</a>;
+{% endfor %}
+</td></tr>
+<tr><td valign="top" align="left"><b>Affiliation:</b></td><td><br></td><td align="left" valign="top">
+{% for aff in paper.aff %}
+{{ forloop.counter0 }}: {{ aff }}; 
+{% endfor %}
+</td></tr>
+<tr><td valign="top" align="left"><b>Publication:</b></td><td><br></td><td align="left" valign="top">{{paper.pub}}, Volume {{paper.volume}}, Issue {{paper.issue}}, article id. {{paper.page.0}} ({{paper.year}}).</td></tr>
+<tr><td valign="top" align="left"><b>Publication Date:</b></td><td><br></td><td align="left" valign="top">{{paper.pubdate}}</td></tr>
+<tr><td valign="top" align="left"><b>Astronomy Keywords:</b></td><td><br></td><td align="left" valign="top">{{paper.keyword}}</td></tr>
+<tr><td valign="top" align="left"><b>DOI:</b></td><td><br></td><td align="left" valign="top"><A href="https://doi.org/{{paper.doi.0}}">{{paper.doi.0}}</a></td></tr>
+<tr><td valign="top" align="left"><b>Bibcode:</b></td><td><br></td><td align="left" valign="top"><A href="http://adsabs.harvard.edu/abs/{{paper.bibcode}}">{{paper.bibcode}}</a></td></tr>
+</tbody></table>
+<h3 align="center">                               Abstract</h3>
+{{paper.abstract | safe}}
+<hr>
+<tt style="white-space: pre;">
+{{bibtex}}
+</tt>
+</body>
+</html>
