@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noarchive" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>{{paper.title.0}}</title>
+<title>{{paper.title.0 | safe}}</title>
 <meta name="citation_language" content="en" />
 <meta name="citation_doi" content="{{paper.doi.0}}" />
 <meta name="citation_abstract_html_url" content="http://adsabs.harvard.edu/abs/{{paper.bibcode}}" />
-<meta name="citation_title" content="{{paper.title.0}}" />
+<meta name="citation_title" content="{{paper.title.0 | safe}}" />
 <meta name="citation_authors" content="{% for auth in paper.authors %}{{auth}}; {% endfor %}" />
-<meta name="citation_keywords" content="{{paper.keywords}}" />
-<meta name="citation_date" content="{{paper.pubdate}}" />
+<meta name="citation_keywords" content="{% for k in paper.keyword %}{{k}}, {% endfor %}" />
+<meta name="citation_date" content="{{paper.pubdate | slice:":-3"}}" />
 <meta name="citation_journal_title" content="{{paper.pub}}" />
 <meta name="citation_volume" content="{{paper.volume}}" />
 <meta name="citation_arxiv_id" content="{{eprint}}" />
@@ -25,9 +25,9 @@
 <link title="schema(DC)" rel="schema.dc" href="http://purl.org/dc/elements/1.1/" />
 <meta name="dc.language" content="en" />
 <meta name="dc.identifier" content="doi:{{paper.doi.0}}" />
-<meta name="dc.date" content="{{paper.pubdate}}" />
+<meta name="dc.date" content="{{paper.pubdate | slice:":-3"}}" />
 <meta name="dc.source" content="{{paper.pub}}, Volume {{paper.volume}}, Issue {{paper.issue}}, article id. {{paper.page.0}} ({{paper.year}})." />
-<meta name="dc.title" content="{{paper.title.0}}" />
+<meta name="dc.title" content="{{paper.title.0 | safe}}" />
 
 {% for author in paper.author %}
 <meta name="dc.creator" content="{{author}}" />
@@ -101,7 +101,7 @@ a.oa:hover {color: #cc33cc}
 <li>{{paper.citation_count}} citations to this Article</li>
 </ul>
 <table><tbody>
-<tr><td valign="top" align="left"><b>Title:</b></td><td><br></td><td align="left" valign="top">{{paper.title.0}}</td></tr>
+<tr><td valign="top" align="left"><b>Title:</b></td><td><br></td><td align="left" valign="top">{{paper.title.0 | safe}}</td></tr>
 <tr><td valign="top" align="left"><b>Authors:</b></td><td><br></td><td align="left" valign="top">
 {% for auth, aff, orcid in authors %}
 <a href="http://orcid.org/{{orcid}}" title="{{aff}}">{{auth}}</a>;
@@ -109,12 +109,12 @@ a.oa:hover {color: #cc33cc}
 </td></tr>
 <tr><td valign="top" align="left"><b>Affiliation:</b></td><td><br></td><td align="left" valign="top">
 {% for aff in paper.aff %}
-{{ forloop.counter0 }}: {{ aff }}; 
+{{ forloop.counter0 | add:"1"}}: {{ aff }}; 
 {% endfor %}
 </td></tr>
 <tr><td valign="top" align="left"><b>Publication:</b></td><td><br></td><td align="left" valign="top">{{paper.pub}}, Volume {{paper.volume}}, Issue {{paper.issue}}, article id. {{paper.page.0}} ({{paper.year}}).</td></tr>
-<tr><td valign="top" align="left"><b>Publication Date:</b></td><td><br></td><td align="left" valign="top">{{paper.pubdate}}</td></tr>
-<tr><td valign="top" align="left"><b>Astronomy Keywords:</b></td><td><br></td><td align="left" valign="top">{{paper.keyword}}</td></tr>
+<tr><td valign="top" align="left"><b>Publication Date:</b></td><td><br></td><td align="left" valign="top">{{paper.pubdate | slice:":-3"}}</td></tr>
+<tr><td valign="top" align="left"><b>Astronomy Keywords:</b></td><td><br></td><td align="left" valign="top">{% for k in paper.keyword %}{{k}}, {% endfor %}</td></tr>
 <tr><td valign="top" align="left"><b>DOI:</b></td><td><br></td><td align="left" valign="top"><A href="https://doi.org/{{paper.doi.0}}">{{paper.doi.0}}</a></td></tr>
 <tr><td valign="top" align="left"><b>Bibcode:</b></td><td><br></td><td align="left" valign="top"><A href="http://adsabs.harvard.edu/abs/{{paper.bibcode}}">{{paper.bibcode}}</a></td></tr>
 </tbody></table>

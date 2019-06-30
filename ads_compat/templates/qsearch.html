@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><!--RAW FILE--><head>
+<!-- base href="http://adsabs.harvard.edu/cgi-bin/basic_connect?qsearch=%5Eong+2019&version=1" -->
+<meta name="robots" content="noarchive">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Query Results</title>
+<link rel="alternate" type="application/rss+xml" title="ADS RSS feed" href="http://adsabs.harvard.edu/cgi-bin/nph-abs_connect?type=RSS&amp;data_type=RSS&amp;cookie=5ccf1b5afe26617">
+<style type="text/css">
+a:link {color: #0000ff}
+a.oa:link {color: #00a000}
+a:visited {color: #4000a0}
+a.oa:visited {color: #006666}
+a:hover {color: #ff0000}
+a.oa:hover {color: #cc33cc}
+.doi{color:#006600;}
+</style>
+</head>
+<body style="background-color: #ffffff; color: #000000">
+
+<h3> Emulator for <a href="http://adsabs.harvard.edu/">SAO/NASA Astrophysics Data System (ADS)</a></h3>
+<table width="100%%"><tbody><tr valign="top"><td align="left">
+<h3>Query Results from the ADS Database</h3>
+<form method="GET" action="/search"><input name="qsearch" value="{{qstring}}" size="60" maxlength="120">  <input type="submit" value="Search again"></form><p>
+
+</p></td>
+<td align="right"><a href="#bottom">Go to bottom of page</a></td></tr></tbody></table>
+<form method="GET" name="myform" action="/search">
+<input name="qsearch" value="{{qstring}}" type="hidden">  <table width="100%"><tbody><tr><td valign="top" align="left">
+Selected and retrieved <strong>{{total}}</strong> abstracts.</td><td valign="top" align="right">
+<select name="qsort" onchange="document.myform.submit();return false">
+<option value="" selected="selected"> Sort options
+</option><option value="date"> Sort by date
+</option><option value="citation_count"> Sort by citations
+</option><option value="classic_factor"> Sort by normalized citations
+</option><option value="first_author"> Sort by author
+</option><option value="author_count"> Sort by author count
+</option><option value="bibcode"> Sort by page (ToC sort)
+</option></select></td>
+</tr></tbody></table>
+<p>
+
+</p><hr>
+<table>
+<tbody><tr>
+<th valign="top" align="left">#</th>
+<th valign="top" align="left">Bibcode</th>
+<th><br></th>
+<th valign="top" align="left">Score</th>
+<th valign="top" align="left">Date</th>
+<th valign="top" align="left"><a href="http://adsabs.harvard.edu/abs_doc/help_pages/results.html#available_items">List of Links</a></th></tr>
+<tr>
+<th valign="top" align="left"></th>
+<th valign="top" align="left">Authors</th>
+<th><br></th>
+<th valign="top" align="left">Title</th>
+<th><br></th>
+<th valign="top" align="left"><a href="http://adsabs.harvard.edu/abs_doc/help_pages/results.html#access_links">Access Control Help</a></th>
+</tr>
+<tr><td colspan="6"><hr></td></tr>
+{% for row in results %}
+<tr><td valign="baseline" nowrap="nowrap" align="left">{{forloop.counter0 | add:"1"}}</td><td width="5%" valign="baseline" align="left"><a href="/abs/{{row.bibcode}}">{{row.bibcode}}</a></td><td><br></td><td valign="baseline" align="left" class='doi'>{{row.classic_factor|stringformat:".3f"}}</td><td valign="baseline" align="left">{{row.pubdate |  slice:":-3"}}</td><td valign="baseline" align="left"><a href="http://adsabs.harvard.edu/cgi-bin/nph-data_query?bibcode={{row.bibcode}}&amp;db_key=AST&amp;link_type=ABSTRACT">A</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://adsabs.harvard.edu/cgi-bin/nph-data_query?bibcode={{row.bibcode}}&amp;db_key=AST&amp;link_type=EJOURNAL">E</a>&nbsp;&nbsp;<a href="http://adsabs.harvard.edu/cgi-bin/nph-data_query?bibcode={{row.bibcode}}&amp;db_key=AST&amp;link_type=ARTICLE">F</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://adsabs.harvard.edu/cgi-bin/nph-data_query?bibcode={{row.bibcode}}&amp;db_key=AST&amp;link_type=OPENURL">L</a>&nbsp;&nbsp;<a class="oa" href="http://adsabs.harvard.edu/cgi-bin/nph-data_query?bibcode={{row.bibcode}}&amp;db_key=AST&amp;link_type=PREPRINT">X</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://adsabs.harvard.edu/cgi-bin/nph-data_query?bibcode={{row.bibcode}}&amp;db_key=AST&amp;link_type=REFERENCES">R</a>&nbsp;&nbsp;<a href="http://adsabs.harvard.edu/cgi-bin/nph-data_query?bibcode={{row.bibcode}}&amp;db_key=AST&amp;link_type=CITATIONS">C</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://adsabs.harvard.edu/cgi-bin/nph-data_query?bibcode={{row.bibcode}}&amp;db_key=AST&amp;link_type=AR">U</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td></td><td width="25%" valign="top" align="left">{% for a in row.author|slice:":10" %}{{a}}; {% endfor %}{% if row.author|length > 10 %}<span style="color:red"> et al. ({{row.author|length}} coauthors)</span>{% endif %}</td><td><br></td><td colspan="3" valign="top" align="left">{{row.title.0 | safe}}</td></tr>
+<tr><td colspan="6"><hr></td></tr>
+{% endfor %}
+</tbody></table>
+<a name="bottom"></a>
+<center>
+<a href="http://adsabs.harvard.edu/">SAO/NASA ADS Homepage</a> | <a href="http://adsabs.harvard.edu/abs_doc/site_map/">ADS Sitemap</a> | <a href="http://adsabs.harvard.edu/abstract_service.html">Query Form</a> | <a href="http://adsabs.harvard.edu/basic_search.html">Basic Search</a> | <a href="http://adsabs.harvard.edu/cgi-bin/pref_set">Preferences</a> | <a href="http://adsabs.harvard.edu/abs_doc/help_pages/help.results_main.html">HELP</a> | <a href="http://adsabs.harvard.edu/abs_doc/faq.html">FAQ</a>
+</center>
+<!-- ADS_MIRROR: CFA4 -->
+
+
+</body></html>
