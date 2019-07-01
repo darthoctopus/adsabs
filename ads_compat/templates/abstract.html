@@ -104,7 +104,8 @@ a.oa:hover {color: #cc33cc}
 <tr><td valign="top" align="left"><b>Title:</b></td><td><br></td><td align="left" valign="top">{{paper.title.0 | safe}}</td></tr>
 <tr><td valign="top" align="left"><b>Authors:</b></td><td><br></td><td align="left" valign="top">
 {% for auth, aff, orcid in authors %}
-<a href="http://orcid.org/{{orcid}}" title="{{aff}}">{{auth}}</a>;
+{% if orcid != "-" %} <a href="http://orcid.org/{{orcid}}" title="{{aff}}">{{auth}}</a>; 
+{% else %} <span title="{{aff}}">{{auth}}</span>; {% endif %}
 {% endfor %}
 </td></tr>
 <tr><td valign="top" align="left"><b>Affiliation:</b></td><td><br></td><td align="left" valign="top">
