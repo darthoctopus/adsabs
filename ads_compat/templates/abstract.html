@@ -16,7 +16,7 @@
 <meta name="citation_date" content="{{paper.pubdate | slice:":-3"}}" />
 <meta name="citation_journal_title" content="{{paper.pub}}" />
 <meta name="citation_volume" content="{{paper.volume}}" />
-<meta name="citation_arxiv_id" content="{{eprint}}" />
+{% if eprint is not None %}<meta name="citation_arxiv_id" content="{{eprint}}" />{%endif%}
 <link title="schema(PRISM)" rel="schema.prism" href="http://prismstandard.org/namespaces/1.2/basic/" />
 <meta name="prism.publicationName" content="{{paper.pub}}" />
 <meta name="prism.volume" content="{{paper.volume}}" />
@@ -97,7 +97,7 @@ a.oa:hover {color: #cc33cc}
 <ul class='head'>
 <li><a class="oa" href="http://adsabs.harvard.edu/cgi-bin/nph-data_query?bibcode={{paper.bibcode}}&amp;link_type=EJOURNAL&amp;db_key=AST">Electronic Refereed Journal Article (HTML)</a></li>
 <li><a class="oa" href="http://adsabs.harvard.edu/cgi-bin/nph-data_query?bibcode={{paper.bibcode}}&amp;link_type=ARTICLE&amp;db_key=AST">Full Refereed Journal Article (PDF/Postscript)</a></li>
-<li><a class="oa" href="https://arxiv.org/abs/{{eprint}}">arXiv e-print</a> (arXiv:{{eprint}})</li>
+{% if eprint is not None %}<li><a class="oa" href="https://arxiv.org/abs/{{eprint}}">arXiv e-print</a> (arXiv:{{eprint}})</li>{% endif %}
 <li>{{paper.citation_count}} citations to this Article</li>
 </ul>
 <table><tbody>

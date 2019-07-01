@@ -25,7 +25,10 @@ def abstract(request, bibcode):
 
 	bibtex = ads.ExportQuery(bibcode).execute()
 
-	eprint = re.search(r'eprint = \{(.+)\}', bibtex)[1]
+	try:
+		eprint = re.search(r'eprint = \{(.+)\}', bibtex)[1]
+	except:
+		eprint = None
 
 	template = loader.get_template('abstract.html')
 	context = {
