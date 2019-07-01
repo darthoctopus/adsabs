@@ -22,20 +22,23 @@ def abstract(request, bibcode):
 		]
 		))
 	assert len(q) == 1, "Non-unique bibcode"
+	paper = q[0]
 
 	bibtex = ads.ExportQuery(bibcode).execute()
-
 	try:
 		eprint = re.search(r'eprint = \{(.+)\}', bibtex)[1]
 	except:
 		eprint = None
 
+	orcid = [pub if pub != '-' else auth for pub, auth in zip(paper.orcid_pub, paper.orcid_user)]
+	orcid = [o if o != '-' else other for o, other in zip(orcid, paper.orcid_other)]
+
 	template = loader.get_template('abstract.html')
 	context = {
-		'paper': q[0],
+		'paper': paper,
 		'eprint': eprint,
 		'bibtex': bibtex,
-		'authors': zip(q[0].author, q[0].aff, q[0].orcid_pub)
+		'authors': zip(paper.author, paper.aff, orcid)
 	}
 	return HttpResponse(template.render(context, request))
 
