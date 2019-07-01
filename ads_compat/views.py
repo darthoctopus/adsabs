@@ -19,7 +19,7 @@ def abstract(request, bibcode):
 		'bibcode', 'title', 'author', 'aff', 'doi', 'pub',
 		'pubdate', 'citation_count', 'abstract', 'arxiv_class',
 		'volume', 'issue', 'page', 'year', 'keyword', 'orcid_pub',
-		'orcid_user'
+		'orcid_user', 'orcid_other'
 		]
 		))
 	assert len(q) == 1, "Non-unique bibcode"
@@ -31,8 +31,15 @@ def abstract(request, bibcode):
 	except:
 		eprint = None
 
-	orcid = [pub if pub != '-' else auth for pub, auth in zip(paper.orcid_pub, paper.orcid_user)]
-	# orcid = [o if o != '-' else other for o, other in zip(orcid, paper.orcid_other)]
+	orcid = paper.orcid_pub
+	try:
+		orcid = [pub if pub != '-' else auth for pub, auth in zip(paper.orcid_pub, paper.orcid_user)]
+	except:
+		pass
+	try:
+		orcid = [o if o != '-' else other for o, other in zip(orcid, paper.orcid_other)]
+	except:
+		pass
 
 	template = loader.get_template('abstract.html')
 	context = {

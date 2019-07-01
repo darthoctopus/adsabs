@@ -110,7 +110,7 @@ a.oa:hover {color: #cc33cc}
 </td></tr>
 <tr><td valign="top" align="left"><b>Affiliation:</b></td><td><br></td><td align="left" valign="top">
 {% for aff in paper.aff %}
-{{ forloop.counter0 | add:"1"}}: {{ aff }}; 
+A{{ forloop.counter0 | add:"1"}}: {{ aff }}; 
 {% endfor %}
 </td></tr>
 <tr><td valign="top" align="left"><b>Publication:</b></td><td><br></td><td align="left" valign="top">{{paper.pub}}, Volume {{paper.volume}}, Issue {{paper.issue}}, article id. {{paper.page.0}} ({{paper.year}}).</td></tr>
