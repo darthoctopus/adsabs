@@ -62,20 +62,32 @@ def qsearch(request, qstring=None):
 	else:
 		sort = 'classic_factor'
 
-	results = list(ads.query(qstring, fl=[
+	if 'page' in request.GET:
+		page = int(request.GET['page'])
+	else:
+		page = 0
+
+	results = list(ads.SearchQuery(q=qstring, fl=[
 			'bibcode', 'title', 'author', 'pubdate', 'doi', 'classic_factor'
-		], sort=sort))
+		], rows=400, start=page*400, sort=sort))
 
 	if sort == 'classic_factor':
-		norm = max(r.classic_factor for r in results)
-		for r in results:
-			r.classic_factor /= norm / 50
-			r.classic_factor += 50
+		try:
+			norm = max(r.classic_factor for r in results)
+			for r in results:
+				r.classic_factor /= norm / 50
+				r.classic_factor += 50
+		except ValueError:
+			# This usually means an empty result
+			# just carry on
+			pass
 
 	template = loader.get_template('qsearch.html')
 	context = {
 	'qstring': qstring,
 	'results': results,
-	'total': len(results)
+	'total': len(results),
+	'page': page,
+	'sort': sort
 	}
 	return HttpResponse(template.render(context, request))
