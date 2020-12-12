@@ -13,19 +13,17 @@
 <meta name="citation_title" content="{{paper.title.0 | safe}}" />
 <meta name="citation_authors" content="{% for auth in paper.authors %}{{auth}}; {% endfor %}" />
 <meta name="citation_keywords" content="{% for k in paper.keyword %}{{k}}, {% endfor %}" />
-<meta name="citation_date" content="{{paper.pubdate | slice:":-3"}}" />
+<meta name="citation_date" content="{{paper.pubdate | slice:':-3'}}" />
 <meta name="citation_journal_title" content="{{paper.pub}}" />
 <meta name="citation_volume" content="{{paper.volume}}" />
 {% if eprint is not None %}<meta name="citation_arxiv_id" content="{{eprint}}" />{%endif%}
-<link title="schema(PRISM)" rel="schema.prism" href="http://prismstandard.org/namespaces/1.2/basic/" />
 <meta name="prism.publicationName" content="{{paper.pub}}" />
 <meta name="prism.volume" content="{{paper.volume}}" />
 <meta name="prism.startingPage" content="" />
 <meta name="prism.endingPage" content="" />
-<link title="schema(DC)" rel="schema.dc" href="http://purl.org/dc/elements/1.1/" />
 <meta name="dc.language" content="en" />
 <meta name="dc.identifier" content="doi:{{paper.doi.0}}" />
-<meta name="dc.date" content="{{paper.pubdate | slice:":-3"}}" />
+<meta name="dc.date" content="{{paper.pubdate | slice:':-3'}}" />
 <meta name="dc.source" content="{{paper.pub}}, Volume {{paper.volume}}, Issue {{paper.issue}}, article id. {{paper.page.0}} ({{paper.year}})." />
 <meta name="dc.title" content="{{paper.title.0 | safe}}" />
 
