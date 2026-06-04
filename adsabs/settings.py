@@ -25,7 +25,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['adsabs.herokuapp.com', 'adsabs.hyad.es']
+ALLOWED_HOSTS = ['adsabs.herokuapp.com', 'adsabs.hyad.es', 'adsabs.onrender.com']
 
 
 # Application definition
