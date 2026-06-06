@@ -74,6 +74,8 @@ def qsearch(request, qstring=None):
 	if sort == 'classic_factor':
 		try:
 			norm = max(r.classic_factor for r in results)
+			if norm == 0:
+				norm = 1
 			for r in results:
 				r.classic_factor /= norm / 50
 				r.classic_factor += 50
